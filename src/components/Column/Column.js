@@ -8,9 +8,7 @@ class Column extends React.Component {
     children: PropTypes.node,
     imggUrl: PropTypes.string,
   }
-  static defaultProps = {
-    children: <p>I can do all the things!!!</p>,
-  }
+
   render() {
     return (
       <section className={styles.component}>
