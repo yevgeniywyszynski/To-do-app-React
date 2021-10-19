@@ -1,8 +1,8 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import styles from './Container.scss';
+import PropTypes from 'prop-types';
 
-const Container = ({children}) => {
+export const Container = ({children}) => {
   return (
     <div className={styles.component}>{children}</div>
   );
@@ -13,4 +13,3 @@ Container.propTypes = {
 };
 
 export default Container;
-

@@ -3,6 +3,7 @@ import styles from './App.scss';
 import PropTypes from 'prop-types';
 import List from '../List/ListContainer.js';
 import Search from  '../Search/SearchContainer';
+import {DragDropContext} from 'react-beautiful-dnd';
 
 class App extends React.Component {
 
@@ -10,14 +11,40 @@ class App extends React.Component {
     const title = this.props.title;
     const subtitle = this.props.subtitle;
     const lists = this.props.lists;
+    const moveCard = this.props.moveCard;
+    const moveCardHandler = result => {
+      if(
+        result.destination
+        &&
+        (
+          result.destination.index != result.source.index
+          ||
+          result.destination.droppableId != result.source.droppableId
+        )
+      ){
+        moveCard({
+          id: result.draggableId,
+          dest: {
+            index: result.destination.index,
+            columnId: result.destination.droppableId,
+          },
+          src: {
+            index: result.source.index,
+            columnId: result.source.droppableId,
+          },
+        });
+      }
+    };
     return (
       <main className={styles.component}>
         <h1 className={styles.title}>{title}</h1>
         <h2 className={styles.subtitle}>{subtitle}</h2>
         <Search/>
-        {lists.map(listData => (
-          <List key={listData.id} {...listData} />
-        ))}
+        <DragDropContext onDragEnd={moveCardHandler}>
+          {lists.map(listData => (
+            <List key={listData.id} {...listData} />
+          ))}
+        </DragDropContext>
       </main>
     );
   }
@@ -25,6 +52,7 @@ class App extends React.Component {
     title: PropTypes.node,
     subtitle: PropTypes.node,
     lists: PropTypes.array,
+    moveCard: PropTypes.func,
   }
 }
 
