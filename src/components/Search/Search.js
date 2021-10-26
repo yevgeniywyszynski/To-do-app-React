@@ -1,18 +1,19 @@
 import React from 'react';
 import styles from './Search.scss';
 import Button from '../Button/Button';
-import PropTypes from 'prop-types';
 import { settings } from '../../data/dataStore';
 import Icon from '../Icon/Icon';
 import Container from '../Container/Container';
+import {withRouter} from 'react-router';
+import PropTypes from 'prop-types';
 
 class Search extends React.Component {
   static propTypes = {
     text: PropTypes.string,
     searchString: PropTypes.string,
-    changeSearchString: PropTypes.func,
     countVisible: PropTypes.number,
     countAll: PropTypes.number,
+    history: PropTypes.object,
   }
 
   static defaultProps = {
@@ -21,6 +22,7 @@ class Search extends React.Component {
 
   state = {
     value: this.props.searchString,
+    visibleButtons: false,
   }
 
   handleChange(event){
@@ -31,17 +33,11 @@ class Search extends React.Component {
   }
 
   handleOK(){
-    this.props.changeSearchString(this.state.value);
-  }
-
-  componentDidUpdate(prevProps){
-    if(this.props.searchString != prevProps.searchString){
-      this.setState({value: this.props.searchString});
-    }
+    this.props.history.push(`/search/${this.state.value}`);
   }
 
   render() {
-    const {text, countVisible, countAll} = this.props;
+    const {text} = this.props;
     const {value} = this.state;
     const {icon} = settings.search;
     return (
@@ -56,13 +52,10 @@ class Search extends React.Component {
           <div className={styles.buttons}>
             <Button onClick={() => this.handleOK()}><Icon name={icon} /></Button>
           </div>
-          <div>
-            { countVisible == countAll ? '' : `${countVisible} / ${countAll}` }
-          </div>
         </div>
       </Container>
     );
   }
 }
 
-export default Search;
+export default withRouter(Search);

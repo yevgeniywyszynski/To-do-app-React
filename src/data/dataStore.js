@@ -21,7 +21,7 @@ export const settings = {
   },
   contact: {
     title: '',
-    image: 'https://lh3.googleusercontent.com/proxy/qC5YtIBMsXqrJd2NqMWnAr-Xi4ng0hMjzW0Zp436v1LhxxXBi9X_GLMe9t_NfEisM_TstLsECEeOjyW8ax9du3qajI2R-iDMzmqEwh2Z8dSJVBS3F0cYKKYePQfEXbeDgF3F87WIyjoUznsK5-x2xhKoBgZr8w',
+    image: 'https://media.istockphoto.com/photos/communication-symbols-contact-info-symbols-picture-id1201366596?k=20&m=1201366596&s=612x612&w=0&h=6swaFuvPnPzJnKYqmbni8Gzbu7WFDBvWGguDFlamm4k=',
   },
   defaultListDescription: '<p>I can do all the things!!!</p>',
   defaultColumnIcon: 'list-alt',
